@@ -1,72 +1,331 @@
-# ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+📊 Telco Customer Churn Analytics & Prediction Dashboard
+Project Overview
 
-## Template Instructions
+Telco Customer Churn Analytics is a comprehensive data analytics and machine learning project designed to analyse customer behaviour, identify churn drivers, and predict the likelihood of customer churn in the telecommunications industry.
 
-Welcome,
+The project combines:
 
-This is the Code Institute student template for the Data Analytics capstone project. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
+Exploratory Data Analysis (EDA)
 
-You can safely delete the Template Instructions section of this README.md file and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
+Machine Learning modelling
 
-## How to use this repo
+Business storytelling
 
-1. Use this template to create your GitHub project repo. Click the **Use this template** button, then click **Create a new repository**.
+An interactive Streamlit dashboard
 
-1. Copy the URL of your repository to your clipboard.
+to transform raw customer data into actionable business insights for decision-makers.
 
-1. In VS Code, select **File** -> **Open Folder**.
+Dataset Content
 
-1. Select your `vscode-projects` folder, then click the **Select Folder** button on Windows, or the **Open** button on Mac.
+Dataset Name: Telco Customer Churn Dataset
 
-1. From the top menu in VS Code, select **Terminal** > **New Terminal** to open the terminal.
+Records: 7,043 customers
 
-1. In the terminal, type `git clone` followed by the URL of your GitHub repository. Then hit **Enter**. This command will download all the files in your GitHub repository into your vscode-projects folder.
+Features: 21 variables
 
-1. In VS Code, select **File** > **Open Folder** again.
+Target Variable: Churn (Yes / No)
 
-1. This time, navigate to and select the folder for the project you just downloaded. Then, click **Select Folder**.
+Feature Categories
 
-1. A virtual environment is necessary when working with Python projects to ensure each project's dependencies are kept separate from each other. You need to create your virtual environment, also called a venv, and then ensure that it is activated any time you return to your workspace.
-Click the gear icon in the lower left-hand corner of the screen to open the Manage menu and select **Command Palette** to open the VS Code command palette.
+Demographics: Gender, Senior Citizen, Partner, Dependents
 
-1. In the command palette, type: *create environment* and select **Python: Create Environment…**
+Account Information: Tenure, Contract Type, Payment Method
 
-1. Choose **Venv** from the dropdown list.
+Services: Internet Service, Online Security, Tech Support, Streaming Services
 
-1. Choose the Python version you installed earlier. Currently, we recommend Python 3.12.8
+Billing: Monthly Charges, Total Charges
 
-1. **DO NOT** click the box next to `requirements.txt`, as you need to do more steps before you can install your dependencies. Click **OK**.
+The dataset is publicly available, anonymised, and suitable for ethical analysis.
 
-1. You will see a `.venv` folder appear in the file explorer pane to show that the virtual environment has been created.
+Business Requirements
 
-1. **Important**: Note that the `.venv` folder is in the `.gitignore` file so that Git won't track it.
+Identify key factors influencing customer churn
 
-1. Return to the terminal by clicking on the TERMINAL tab, or click on the **Terminal** menu and choose **New Terminal** if no terminal is currently open.
+Measure churn rate across customer segments
 
-1. In the terminal, use the command below to install your dependencies. This may take several minutes.
+Predict churn risk for individual customers
 
- ```console
- pip3 install -r requirements.txt
- ```
+Support proactive customer retention strategies
 
-1. Open the `jupyter_notebooks` directory, and click on the notebook you want to open.
+Present insights clearly to both technical and non-technical stakeholders
 
-1. Click the **kernel** button and choose **Python Environments**.
+Hypotheses and Validation
+Hypothesis 1
 
-Note that the kernel says `Python 3.12.8` as it inherits from the venv, so it will be Python-3.12.8 if that is what is installed on your PC. To confirm this, you can use the command below in a notebook code cell.
+Customers on month-to-month contracts are more likely to churn.
 
-```console
-! python --version
-```
+Validation:
+Churn rates were calculated and visualised by contract type. Month-to-month customers showed significantly higher churn percentages.
 
-## Deployment Reminders
+Hypothesis 2
 
-* Set the `.python-version` Python version to a [Heroku-22](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version that closest matches what you used in this project.
-* The project can be deployed to Heroku using the following steps.
+Customers with shorter tenure are more likely to churn.
 
-1. Log in to Heroku and create an App
-2. At the **Deploy** tab, select **GitHub** as the deployment method.
-3. Select your repository name and click **Search**. Once it is found, click **Connect**.
-4. Select the branch you want to deploy, then click **Deploy Branch**.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button **Open App** at the top of the page to access your App.
-6. If the slug size is too large, then add large files not required for the app to the `.slugignore` file.
+Validation:
+Tenure distributions were analysed and compared across churn groups using histograms and boxplots.
+
+Hypothesis 3
+
+Customers with higher monthly charges have a higher churn risk.
+
+Validation:
+Monthly charges were analysed using boxplots and churn rate comparisons.
+
+Hypothesis 4
+
+Value-added services (Online Security, Tech Support) reduce churn.
+
+Validation:
+Churn rates were compared between customers with and without these services.
+
+Project Plan
+High-Level Steps
+
+Data loading and inspection
+
+Data cleaning and type corrections
+
+Exploratory Data Analysis
+
+Feature engineering
+
+Machine learning model training
+
+Model evaluation
+
+Dashboard design and deployment
+
+Data Management
+
+Collection: CSV dataset loaded using Pandas
+
+Processing: Data cleaning, encoding, scaling
+
+Analysis: Statistical summaries and visual exploration
+
+Interpretation: Business-focused insights extracted from patterns
+
+All processing steps were documented and reproducible.
+
+Research Methodology
+
+EDA-first approach to understand customer behaviour
+
+Supervised machine learning for churn prediction
+
+Visual storytelling to communicate insights
+
+This methodology balances interpretability with predictive performance.
+
+Mapping Business Requirements to Visualisations
+Business Requirement	Visualisation
+Measure churn rate	Bar & pie charts
+Identify churn drivers	Feature importance plot
+Compare customer segments	Boxplots & histograms
+Predict churn risk	Gauge chart
+Evaluate model	Confusion matrix & ROC metrics
+Analysis Techniques Used
+
+Descriptive statistics
+
+Distribution analysis
+
+Grouped churn rate calculations
+
+Supervised classification (Logistic Regression, Random Forest)
+
+Limitations
+
+Dataset is historical and static
+
+External factors (competitor pricing, promotions) not included
+
+Alternative Approaches
+
+Time-series churn modelling
+
+Survival analysis
+
+Deep learning models
+
+Use of Generative AI Tools
+
+Generative AI tools were used to:
+
+Assist with code optimisation
+
+Improve dashboard layout and UX
+
+Enhance business storytelling
+
+Generate documentation and explanations
+
+All AI-assisted content was reviewed and customised.
+
+Ethical Considerations
+
+Dataset is anonymised with no personal identifiers
+
+No sensitive attributes used for discriminatory decisions
+
+Bias was monitored by comparing churn predictions across groups
+
+Ethical and responsible AI principles were followed.
+
+Dashboard Design
+Dashboard Pages
+Overview
+
+KPIs
+
+Churn distribution
+
+High-level insights
+
+Analytics
+
+Interactive EDA
+
+Feature-level churn analysis
+
+Feature Importance
+
+Top churn drivers
+
+Business interpretation
+
+Prediction
+
+Individual customer churn risk
+
+Actionable recommendations
+
+Model Performance
+
+Accuracy, ROC-AUC
+
+Confusion matrix
+
+Cross-validation results
+
+About
+
+Project background
+
+Methodology
+
+Business value
+
+Communicating Insights
+
+Non-technical users: KPIs, simple charts, clear labels
+
+Technical users: Model metrics, feature importance
+
+Executives: Business impact and recommendations
+
+Unfixed Bugs
+
+Prediction page uses heuristic fallback if model file is unavailable
+
+Dashboard does not currently support batch predictions
+
+These were documented and acknowledged.
+
+Knowledge Gaps & Improvements
+
+Improved understanding of Streamlit performance optimisation
+
+Enhanced ML explainability knowledge (SHAP planned)
+
+Peer feedback helped improve dashboard clarity and storytelling.
+
+Development Roadmap
+Challenges Faced
+
+Feature encoding consistency
+
+Model integration into Streamlit
+
+Dashboard UX balancing detail vs simplicity
+
+Future Enhancements
+
+SHAP explainability
+
+Real-time data ingestion
+
+API deployment
+
+Cloud hosting
+
+Deployment
+⚙️ How to Run the Project
+1️⃣ Clone the Repository
+git clone https://github.com/swathim251205/telco-churn-analysis-ml.git
+cd telco-churn-analysis-ml
+
+2️⃣ Install Dependencies
+pip install -r requirements.txt
+
+3️⃣ Run the Streamlit Dashboard
+streamlit run dashboard/app.py
+
+Cloud Deployment (Future)
+
+Streamlit Cloud / Heroku compatible
+
+Environment managed via requirements.txt
+
+Main Data Analysis Libraries
+
+Pandas: Data manipulation
+
+NumPy: Numerical operations
+
+Scikit-learn: Machine learning models
+
+Plotly: Interactive visualisations
+
+Streamlit: Dashboard development
+
+Credits
+Content
+
+Dataset: IBM Telco Customer Churn Dataset
+
+Streamlit documentation
+
+Scikit-learn documentation
+
+Media
+
+Icons: Streamlit & Plotly defaults
+
+Charts: Generated within the project
+
+Acknowledgements (Optional)
+
+Thanks to instructors, peers, and online communities for guidance and feedback throughout this project.
+
+About Project
+
+Dataset: https://www.kaggle.com/datasets/blastchar/telco-customer-churn
+
+Project Type: Data Analytics with Artificial Intelligence – Capstone Project (Code Institute)
+
+Domain: Telecommunications
+
+Focus: Customer Churn Prediction & Business Intelligence
+
+# 🌐 Connect with Me 
+
+👩‍💻 **Swathi Mulkundkar** 
+
+🔗 [LinkedIn](https://www.linkedin.com/in/swathimulkundkar/) 
+
+🐙 [GitHub](https://github.com/swathim251205)
+
+⭐ If You Like This Project
+
+Give this repository a ⭐ and feel free to explore or fork it!
