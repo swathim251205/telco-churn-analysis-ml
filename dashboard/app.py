@@ -453,6 +453,14 @@ and validate hypotheses before designing retention strategies.
                 margin=dict(l=60, r=40, t=60, b=60)
             )
             st.plotly_chart(fig, use_container_width=True)
+            st.info("""
+**How to interpret this chart:**  
+Higher churn rates indicate **risk-driving segments**.  
+Use this view to identify:
+- High-risk customer groups
+- Service gaps
+- Pricing sensitivity
+""")
         else:
             cat_features = df_raw.select_dtypes(include=['object']).columns.tolist()
             selected_feature = st.selectbox("Select:", cat_features)
@@ -925,3 +933,9 @@ to **proactive, data-driven decision making**.
     **Role:** Data Scientist & ML Engineer    
       Passionate about leveraging data to solve real-world business problems through analytics and machine learning.
     """, unsafe_allow_html=True)
+
+
+
+
+    
+    
