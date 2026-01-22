@@ -11,11 +11,12 @@ warnings.filterwarnings('ignore')
 # PAGE CONFIGURATION
 # ============================================================================
 st.set_page_config(
-    page_title="Telco Churn Analytics",
+    page_title="Telco Customer Churn Analytics",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
 
 # Professional Light Theme CSS
 st.markdown("""
@@ -154,6 +155,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+
 # ============================================================================
 # LOAD DATA & MODELS
 # ============================================================================
@@ -197,19 +199,18 @@ if df_raw is None:
 # SIDEBAR NAVIGATION
 # ============================================================================
 with st.sidebar:
-    st.markdown("# 📊 Telco Analytics")
+    st.markdown("# 📊 Telco Customer Churn Analytics")
     st.markdown("---")
     
     page = st.radio(
         "Navigation:",
-        ["🏠 Overview", "📈 Analytics", "🎯 Features", "🔮 Predict", "📋 Performance", "ℹ️ About"],
-        label_visibility="collapsed"
+        ["🏠 Overview", "📈 Analytics", "🎯 Features", "🔮 Predict", "📋 Performance", "ℹ️ About"]
     )
     
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; padding: 1.5rem 0;'>
-        <p style='color: #FFFFFF; font-weight: 600; margin: 0;'>Telco Churn Analytics</p>
+        <p style='color: #FFFFFF; font-weight: 600; margin: 0;'>Telco Customer Churn Analytics</p>
         <p style='color: #cbd5e1; font-size: 0.85rem; margin: 0.25rem 0 0 0;'>v1.0</p>
     </div>
     """, unsafe_allow_html=True)
@@ -217,9 +218,23 @@ with st.sidebar:
 # ============================================================================
 # PAGE 1: OVERVIEW
 # ============================================================================
+
+
 if page == "🏠 Overview":
-    st.markdown('<h1 class="main-header">📊 Customer Churn Analytics</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">📊 Telco Customer Churn Analytics</h1>', unsafe_allow_html=True)
     st.markdown("---")
+    st.markdown("""
+### 🎯 Business Objective
+
+The primary goal of this dashboard is to **identify customers at risk of churn**,  
+**understand the key drivers behind churn**, and **support proactive retention strategies**  
+using data-driven insights and machine learning predictions.
+
+This enables business teams to:
+- Reduce revenue loss
+- Improve customer lifetime value
+- Prioritise retention efforts efficiently
+""")
     
     col1, col2, col3, col4 = st.columns(4)
     
@@ -260,6 +275,17 @@ if page == "🏠 Overview":
             margin=dict(l=40, r=40, t=60, b=40)
         )
         st.plotly_chart(fig, use_container_width=True)
+        st.info("""
+**What this shows:**  
+This chart highlights the proportion of customers who have churned versus those who remain active.
+
+**Key insight:**  
+Approximately **1 in 4 customers have churned**, indicating a **material retention risk** that directly impacts revenue.
+
+**Business implication:**  
+Retention initiatives should focus on **early identification of churn signals**, especially among vulnerable customer segments.
+""")
+
     
     with col2:
         fig = px.histogram(
@@ -291,6 +317,17 @@ if page == "🏠 Overview":
             legend=dict(font=dict(size=10, color="#374151"))
         )
         st.plotly_chart(fig, use_container_width=True)
+        st.info("""
+**What this shows:**  
+Customer tenure distribution split by churn status.
+
+**Key insight:**  
+Customers with **shorter tenure are significantly more likely to churn**, especially within the first 12 months.
+
+**Business implication:**  
+The **early customer lifecycle** is critical — onboarding experience, early engagement, and welcome offers can dramatically reduce churn.
+""")
+
     
     col1, col2 = st.columns(2)
     
@@ -314,6 +351,17 @@ if page == "🏠 Overview":
             margin=dict(l=60, r=40, t=60, b=60)
         )
         st.plotly_chart(fig, use_container_width=True)
+        st.info("""
+**What this shows:**  
+Comparison of monthly charges between churned and retained customers.
+
+**Key insight:**  
+Customers who churn tend to have **higher monthly charges**, suggesting **price sensitivity**.
+
+**Business implication:**  
+High-billing customers should receive **value reinforcement**, loyalty discounts, or service bundling to justify cost.
+""")
+
     
     with col2:
         contract_churn = df_raw.groupby('Contract')['Churn'].apply(
@@ -340,6 +388,18 @@ if page == "🏠 Overview":
             margin=dict(l=60, r=40, t=60, b=60)
         )
         st.plotly_chart(fig, use_container_width=True)
+        st.success("""
+**What this shows:**  
+Churn rate across different contract types.
+
+**Key insight:**  
+- Month-to-month contracts show the **highest churn**
+- Long-term contracts significantly **reduce churn risk**
+
+**Business implication:**  
+Encouraging customers to move to **1-year or 2-year contracts** is one of the **most effective retention levers**.
+""")
+
 
 # ============================================================================
 # PAGE 2: ANALYTICS
@@ -358,6 +418,14 @@ elif page == "📈 Analytics":
         st.metric("⚠️ Missing", df_raw.isnull().sum().sum())
     
     st.markdown('<h2 class="section-header">Feature Exploration</h2>', unsafe_allow_html=True)
+
+    st.markdown("""
+### 🔍 Exploratory Analysis Objective
+
+This section allows business users to **interactively explore how individual features influence churn**  
+and validate hypotheses before designing retention strategies.
+""")
+
     
     col1, col2 = st.columns([1, 2])
     
@@ -410,6 +478,15 @@ elif page == "📈 Analytics":
                 margin=dict(l=60, r=40, t=60, b=60)
             )
             st.plotly_chart(fig, use_container_width=True)
+            st.info("""
+**How to interpret this chart:**  
+Higher churn rates indicate **risk-driving segments**.  
+Use this view to identify:
+- High-risk customer groups
+- Service gaps
+- Pricing sensitivity
+""")
+
 
 # ============================================================================
 # PAGE 3: FEATURES
@@ -442,6 +519,17 @@ elif page == "🎯 Features":
             margin=dict(l=200, r=40, t=60, b=40)
         )
         st.plotly_chart(fig, use_container_width=True)
+        st.success("""
+**What this shows:**  
+Relative importance of features used by the machine learning model to predict churn.
+
+**Key insight:**  
+A small group of features (e.g., **contract type, tenure, charges**) explains the majority of churn behaviour.
+
+**Business implication:**  
+Retention strategies should prioritise **high-impact drivers** rather than spreading effort across low-impact features.
+""")
+
         
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -453,6 +541,11 @@ elif page == "🎯 Features":
         
         st.markdown("---")
         st.dataframe(feature_importance.head(15), use_container_width=True, hide_index=True)
+        st.info("""
+**Why this matters:**  
+Focusing on the **top 3 drivers** yields the **highest ROI** for churn reduction initiatives.
+""")
+
 
 # ============================================================================
 # PAGE 4: PREDICT
@@ -463,6 +556,13 @@ elif page == "🔮 Predict":
     st.markdown("---")
 
     st.markdown('<h2 class="section-header">📋 Enter Customer Information</h2>', unsafe_allow_html=True)
+    st.markdown("""
+### 🎯 Prediction Objective
+
+This tool estimates an individual customer's **likelihood of churn**  
+and provides **actionable recommendations** to retain them before they leave.
+""")
+
 
     # =======================
     # Customer Input Form
@@ -561,12 +661,28 @@ elif page == "🔮 Predict":
                 gauge={'axis': {'range': [0, 100]}}
             ))
             st.plotly_chart(fig, use_container_width=True)
+            st.info("""
+**How to use this score:**  
+- **Low risk:** Maintain engagement  
+- **Moderate risk:** Proactive outreach  
+- **High risk:** Immediate retention action
+
+This score enables **prioritised intervention**, not blanket discounts.
+""")
+
 
         # =======================
         # Recommendations
         # =======================
         st.markdown("---")
         st.markdown('<h2 class="section-header">💡 Recommendations</h2>', unsafe_allow_html=True)
+        st.markdown("""
+### 📌 Retention Strategy Guidance
+
+Recommendations are generated based on **risk level and customer profile**,  
+supporting **targeted, cost-effective retention actions**.
+""")
+
 
         if risk_percentage < 20:
             st.success("""
@@ -642,6 +758,7 @@ elif page == "📋 Performance":
     
     st.markdown('<h2 class="section-header">Detailed Evaluation</h2>', unsafe_allow_html=True)
     
+    
     col1, col2 = st.columns(2)
     
     with col1:
@@ -662,6 +779,14 @@ elif page == "📋 Performance":
             margin=dict(l=40, r=40, t=60, b=40)
         )
         st.plotly_chart(fig, use_container_width=True)
+        st.info("""
+**How to interpret this:**  
+- True Positives: Correctly identified churners  
+- False Negatives: Missed churners (highest business risk)
+
+Reducing false negatives is key to improving retention outcomes.
+""")
+
     
     with col2:
         metrics_data = {
@@ -686,6 +811,13 @@ elif page == "📋 Performance":
             margin=dict(l=40, r=40, t=60, b=40)
         )
         st.plotly_chart(fig, use_container_width=True)
+        st.info("""
+        **Model objective:**  
+Maximise detection of churners while maintaining reasonable precision.
+
+**Why recall matters:**  
+Missing a churner is more costly than incorrectly flagging a loyal customer.
+""")
     
     st.markdown('<h2 class="section-header">Cross-Validation Results</h2>', unsafe_allow_html=True)
     cv_scores = [0.8341, 0.8626, 0.8512, 0.8205, 0.8501]
@@ -712,6 +844,12 @@ elif page == "📋 Performance":
         margin=dict(l=60, r=40, t=60, b=60)
     )
     st.plotly_chart(fig, use_container_width=True)
+    st.success("""
+**What this shows:**  
+Consistent performance across folds indicates the model is **stable and generalisable**,  
+not overfitting to a specific sample.
+""")
+
 
 # ============================================================================
 # PAGE 6: ABOUT
@@ -769,10 +907,21 @@ elif page == "ℹ️ About":
     }
     st.dataframe(pd.DataFrame(drivers), use_container_width=True, hide_index=True)
     
-    st.markdown("---")
+    
+    st.info("""
+### 🧠 Business Value Summary
+
+This dashboard transforms raw customer data into:
+- **Actionable churn insights**
+- **Predictive risk scoring**
+- **Targeted retention strategies**
+
+It enables leadership to move from **reactive churn analysis**  
+to **proactive, data-driven decision making**.
+""")
+    
     st.markdown("""
-    <div style='text-align: center; color: #6b7280; padding: 2rem;'>
-    <p><strong>Telco Customer Churn Analytics</strong></p>
-    <p>Powered by Machine Learning • Data-Driven Insights</p>
-    </div>
+    **Developed by:** Swathi Mulkundkar      
+    **Role:** Data Scientist & ML Engineer    
+      Passionate about leveraging data to solve real-world business problems through analytics and machine learning.
     """, unsafe_allow_html=True)
