@@ -241,7 +241,7 @@ All AI-assisted content was reviewed and customised.
 #### 1️⃣ Clone the Repository
 
 git clone https://github.com/swathim251205/telco-churn-analysis-ml.git
-cd telco-churn-analysis-ml
+
 
 
 2️⃣ Install Dependencies
