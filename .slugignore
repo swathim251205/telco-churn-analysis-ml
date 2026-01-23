@@ -1,6 +1,5 @@
-__pycache__/
 *.ipynb
-data/
-.env
-.vscode/
+notebooks/
+.git/
+*.md
 tests/
