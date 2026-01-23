@@ -13,6 +13,14 @@ import joblib
 import warnings
 warnings.filterwarnings('ignore')
 
+# DEBUG: Check current working directory and file paths
+st.write("**DEBUG: Current directory:**", os.getcwd())
+st.write("**DEBUG: Files in /app:**", os.listdir("/app"))
+if os.path.exists("/app/data"):
+    st.write("**DEBUG: Files in /app/data:**", os.listdir("/app/data"))
+    if os.path.exists("/app/data/raw"):
+        st.write("**DEBUG: Files in /app/data/raw:**", os.listdir("/app/data/raw"))
+
 # ============================================================================
 # PAGE CONFIGURATION
 # ============================================================================
