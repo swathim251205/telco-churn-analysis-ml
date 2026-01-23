@@ -1,2 +1,6 @@
-jupyter_notebooks/*
-README.md
+__pycache__/
+*.ipynb
+data/
+.env
+.vscode/
+tests/

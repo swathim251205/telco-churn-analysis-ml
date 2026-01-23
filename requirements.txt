@@ -4,5 +4,5 @@ scikit-learn==1.3.2
 ppscore==1.3.0
 matplotlib
 seaborn
-xgboost
-lightgbm
+streamlit
+joblib
