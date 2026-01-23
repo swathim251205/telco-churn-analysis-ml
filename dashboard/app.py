@@ -1,3 +1,9 @@
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))
+
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -162,38 +168,40 @@ st.markdown("""
 @st.cache_resource
 def load_data_and_models():
     try:
-        df_raw = pd.read_csv('data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv')
-        
+        df_raw = pd.read_csv(
+            os.path.join(PROJECT_ROOT, "data", "raw", "WA_Fn-UseC_-Telco-Customer-Churn.csv")
+        )
+
         try:
-            feature_importance = pd.read_csv('data/processed/feature_importance.csv')
-        except:
-            feature_importance = pd.DataFrame({'Feature': ['N/A'], 'Importance': [0]})
-        
+            feature_importance = pd.read_csv(
+                os.path.join(PROJECT_ROOT, "data", "processed", "feature_importance.csv")
+            )
+        except Exception:
+            feature_importance = pd.DataFrame(
+                {"Feature": ["N/A"], "Importance": [0]}
+            )
+
         try:
-            rf_model = joblib.load('data/models/rf_churn_model.pkl')
-        except:
+            rf_model = joblib.load(
+                os.path.join(PROJECT_ROOT, "data", "models", "rf_churn_model.pkl")
+            )
+        except Exception:
             rf_model = None
-        
+
         try:
-            scaler = joblib.load('data/models/scaler.pkl')
-        except:
+            scaler = joblib.load(
+                os.path.join(PROJECT_ROOT, "data", "models", "scaler.pkl")
+            )
+        except Exception:
             scaler = None
-        
-        try:
-            with open('data/models/feature_names.pkl', 'rb') as f:
-                feature_names = joblib.load(f)
-        except:
-            feature_names = df_raw.columns.tolist()
-        
-        return df_raw, feature_importance, rf_model, scaler, feature_names
+
+        return df_raw, feature_importance, rf_model, scaler
+
     except Exception as e:
-        return None, None, None, None, None
+        st.error("❌ Failed to load data files. Check file paths.")
+        st.exception(e)
+        st.stop()
 
-df_raw, feature_importance, rf_model, scaler, feature_names = load_data_and_models()
-
-if df_raw is None:
-    st.error("❌ Failed to load data files. Check file paths.")
-    st.stop()
 
 # ============================================================================
 # SIDEBAR NAVIGATION
