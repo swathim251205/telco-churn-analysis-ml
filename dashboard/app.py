@@ -165,6 +165,7 @@ st.markdown("""
 # ============================================================================
 # LOAD DATA & MODELS
 # ============================================================================
+
 @st.cache_resource
 def load_data_and_models():
     try:
@@ -201,6 +202,17 @@ def load_data_and_models():
         st.error("❌ Failed to load data files. Check file paths.")
         st.exception(e)
         st.stop()
+
+# Call the function and unpack results
+df_raw, feature_importance, rf_model, scaler = load_data_and_models()
+
+
+# ============================================================================
+# SIDEBAR NAVIGATION
+# ============================================================================
+with st.sidebar:
+    st.markdown("# 📊 Telco Customer Churn Analytics")
+    # ... rest of your code
 
 
 # ============================================================================
