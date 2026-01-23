@@ -1,9 +1,3 @@
-import os
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))
-
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -13,13 +7,53 @@ import joblib
 import warnings
 warnings.filterwarnings('ignore')
 
-# DEBUG: Check current working directory and file paths
-st.write("**DEBUG: Current directory:**", os.getcwd())
-st.write("**DEBUG: Files in /app:**", os.listdir("/app"))
+import streamlit as st
+import pandas as pd
+import numpy as np
+import plotly.graph_objects as go
+import plotly.express as px
+import joblib
+import warnings
+import os
+warnings.filterwarnings('ignore')
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))
+
+# ============================================================================
+# DEBUG: ADD THIS SECTION TEMPORARILY
+# ============================================================================
+st.write("## 🔍 DEBUG INFORMATION")
+st.write("**Current working directory:**", os.getcwd())
+st.write("**BASE_DIR:**", BASE_DIR)
+st.write("**PROJECT_ROOT:**", PROJECT_ROOT)
+
+st.write("\n**Files in current directory:**")
+st.write(os.listdir(os.getcwd()))
+
+if os.path.exists("/app"):
+    st.write("\n**Files in /app:**")
+    st.write(os.listdir("/app"))
+    
 if os.path.exists("/app/data"):
-    st.write("**DEBUG: Files in /app/data:**", os.listdir("/app/data"))
-    if os.path.exists("/app/data/raw"):
-        st.write("**DEBUG: Files in /app/data/raw:**", os.listdir("/app/data/raw"))
+    st.write("\n**Files in /app/data:**")
+    st.write(os.listdir("/app/data"))
+else:
+    st.error("❌ /app/data does NOT exist!")
+
+if os.path.exists("/app/data/raw"):
+    st.write("\n**Files in /app/data/raw:**")
+    st.write(os.listdir("/app/data/raw"))
+else:
+    st.error("❌ /app/data/raw does NOT exist!")
+
+st.write("\n**Looking for file at:**")
+st.write(os.path.join(PROJECT_ROOT, "data", "raw", "WA_Fn-UseC_-Telco-Customer-Churn.csv"))
+st.write("**File exists?**", os.path.exists(os.path.join(PROJECT_ROOT, "data", "raw", "WA_Fn-UseC_-Telco-Customer-Churn.csv")))
+st.write("---")
+# ============================================================================
+# END DEBUG
+# ============================================================================
 
 # ============================================================================
 # PAGE CONFIGURATION
