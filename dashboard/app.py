@@ -214,13 +214,6 @@ def load_data_and_models():
 df_raw, feature_importance, rf_model, scaler = load_data_and_models()
 
 
-# ============================================================================
-# SIDEBAR NAVIGATION
-# ============================================================================
-with st.sidebar:
-    st.markdown("# 📊 Telco Customer Churn Analytics")
-    # ... rest of your code
-
 
 # ============================================================================
 # SIDEBAR NAVIGATION
